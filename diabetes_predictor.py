@@ -3,10 +3,8 @@ import numpy as np
 import pickle
 from tensorflow.keras.models import load_model
 
-# ----------------- Page Config -----------------
 st.set_page_config(page_title="Diabetes Prediction App", page_icon="💉", layout="wide")
 
-# ----------------- Custom CSS Animation -----------------
 st.markdown("""
 <style>
 body {
@@ -62,20 +60,16 @@ h1, h2, h3, h4 {
 </style>
 """, unsafe_allow_html=True)
 
-# ----------------- Load Model & Scaler -----------------
 model = load_model("diabetes_model.keras")
 with open("scaler.pkl", "rb") as file:
     std = pickle.load(file)
 
-# ----------------- Title Section -----------------
 st.markdown("<h1 style='text-align:center;'>💉 Diabetes Prediction App</h1>", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align:center;'>_An AI-powered tool to predict diabetes using health data._</h4>", unsafe_allow_html=True)
 st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
-# Custom Pulse Animation
 st.markdown("<div class='pulse'></div>", unsafe_allow_html=True)
 
-# ----------------- Input Section -----------------
 st.subheader("🧬 Enter Your Medical Details:")
 
 col1, col2, col3, col4 = st.columns(4)
@@ -96,7 +90,6 @@ with col4:
     DiabetesPedigreeFunction = st.number_input("Diabetes Pedigree Function", min_value=0.0, max_value=2.5, value=0.5)
     Age = st.number_input("Age", min_value=1, max_value=120, value=30)
 
-# ----------------- Prediction -----------------
 if st.button("🔍 Predict"):
     input_data = np.array([[Pregnancies, Glucose, BloodPressure, SkinThickness,
                             Insulin, BMI, DiabetesPedigreeFunction, Age]])
@@ -122,5 +115,4 @@ if st.button("🔍 Predict"):
         </div>
         """, unsafe_allow_html=True)
 
-# ----------------- Footer -----------------
 st.markdown("<div class='footer'>Built with ❤️ by <b>Talha</b> | Powered by TensorFlow & Streamlit</div>", unsafe_allow_html=True)
